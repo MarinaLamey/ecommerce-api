@@ -5,12 +5,20 @@ const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, "db.json"));
 const middlewares = jsonServer.defaults();
 
-// Middleware
+// Middlewares
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// Routes
+// Custom route example
+server.get("/hello", (req, res) => {
+  res.json({ message: "Hello from Vercel JSON Server!" });
+});
+
+// Enable POST, PUT, DELETE via json-server router
 server.use(router);
 
-// Export (Vercel لازم تستخدم module.exports)
-module.exports = server;
+// Listen on dynamic port for Vercel
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`JSON Server is running on port ${port}`);
+});
