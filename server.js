@@ -1,18 +1,16 @@
-
-
-
-const express = require("express");
 const jsonServer = require("json-server");
 const path = require("path");
 
-const server = express();
+const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, "db.json"));
 const middlewares = jsonServer.defaults();
 
+// Middleware
 server.use(middlewares);
+server.use(jsonServer.bodyParser);
+
+// Routes
 server.use("/api", router);
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`✅ JSON Server is running on port ${PORT}`);
-});
+// Export (Vercel لازم تستخدم module.exports)
+module.exports = server;
