@@ -9,16 +9,16 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// Custom route example
+// Example route
 server.get("/hello", (req, res) => {
   res.json({ message: "Hello from Vercel JSON Server!" });
 });
 
-// Enable POST, PUT, DELETE via json-server router
+// Use default router
 server.use(router);
 
 // Listen on dynamic port for Vercel
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
-  console.log(`JSON Server is running on port ${port}`);
+  console.log(`JSON Server running on port ${port}`);
 });
