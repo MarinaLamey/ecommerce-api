@@ -10,7 +10,7 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
 // Routes
-server.use("/api", router);
+server.use(router);
 
 // Export (Vercel لازم تستخدم module.exports)
 module.exports = server;
